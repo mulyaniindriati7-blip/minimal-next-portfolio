@@ -99,7 +99,7 @@ export default function Portfolio() {
           </h2>
           <p className="text-slate-300">Jika ingin berdiskusi atau terhubung dengan saya:</p>
           <div className="mt-4 space-y-2 text-slate-300">
-            <p>📧 <span className="font-medium text-slate-200">Email:</span> mulyaniindriati7@gmail.com</p>
+            <p>📧 <span className="font-medium text-slate-200">Email:</span> mulyaniindriati32@gmail.com</p>
             <p>🏫 <span className="font-medium text-slate-200">Sekolah:</span> SMK Teknik Komputer dan Jaringan</p>
           </div>
         </section>
