@@ -1,325 +1,115 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import Script from "next/script";
+import React from 'react';
 
-import BlogCard from "@/components/blogs/blog-card";
-import { AnimatedSection } from "@/components/common/animated-section";
-import { AnimatedText } from "@/components/common/animated-text";
-import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
-import { Icons } from "@/components/common/icons";
-import ContributionCard from "@/components/contributions/contribution-card";
-import ExperienceCard from "@/components/experience/experience-card";
-import ProjectCard from "@/components/projects/project-card";
-import SkillsCard from "@/components/skills/skills-card";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { featuredContributions } from "@/config/contributions";
-import { experiences } from "@/config/experience";
-import { pagesConfig } from "@/config/pages";
-import { featuredProjects } from "@/config/projects";
-import { siteConfig } from "@/config/site";
-import { featuredSkills } from "@/config/skills";
-import { getFeaturedBlogs } from "@/lib/blogs";
-import { cn } from "@/lib/utils";
-import profileImg from "@/public/profile-img.jpg";
-
-export const metadata: Metadata = {
-  title: `${pagesConfig.home.metadata.title}`,
-  description:
-    "Naman Barkiya - Applied AI Engineer working at the intersection of AI, data, and scalable software systems. Explore my projects, experience, and contributions.",
-  alternates: {
-    canonical: siteConfig.url,
-  },
-};
-
-export default function IndexPage() {
-  const featuredBlogs = getFeaturedBlogs();
-  // Structured data for personal portfolio
-  const personSchema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.authorName,
-    url: siteConfig.url,
-    image: siteConfig.ogImage,
-    jobTitle: "Applied AI Engineer",
-    sameAs: [siteConfig.links.github, siteConfig.links.twitter],
-  };
-
-  // Structured data for website as a software application (template)
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Next.js Portfolio Template",
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Web",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    author: {
-      "@type": "Person",
-      name: siteConfig.authorName,
-      url: siteConfig.url,
-    },
-  };
-
+export default function Portfolio() {
   return (
-    <ClientPageWrapper>
-      <Script
-        id="schema-person"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <Script
-        id="schema-software"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
+    <main className="min-h-screen bg-slate-900 text-slate-100 font-sans px-4 py-10 md:px-20">
+      <div className="max-w-4xl mx-auto space-y-12">
+        
+        {/* Header / Hero */}
+        <header className="text-center space-y-4 py-10 border-b border-slate-800">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent animate-pulse">
+            Mulyani Indriati
+          </h1>
+          <p className="text-lg md:text-xl text-slate-400 font-medium">
+            Siswa SMK Teknik Komputer dan Jaringan | Organisatoris
+          </p>
+        </header>
 
-      <section className="space-y-6 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
-        <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center -mt-20">
-          <Image
-            src={profileImg}
-            height={100}
-            width={100}
-            sizes="100vw"
-            className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-8 border-primary"
-            alt="Naman Barkiya - Applied AI Engineer Portfolio"
-            priority
-          />
-          <AnimatedText
-            as="h1"
-            delay={0.2}
-            className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            Naman Barkiya
-          </AnimatedText>
-          <AnimatedText
-            as="h3"
-            delay={0.4}
-            className="font-heading text-base sm:text-xl md:text-xl lg:text-2xl"
-          >
-            Applied AI Engineer
-          </AnimatedText>
-          <div className="mt-4 max-w-[42rem] text-center">
-            <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-              Software engineer working at the intersection of AI, data, and
-              scalable software systems.
-            </p>
-          </div>
+        {/* Tentang Saya */}
+        <section className="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700/50 shadow-xl backdrop-blur-sm transition-all hover:border-slate-600">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4 border-b border-slate-700 pb-2">
+            Tentang Saya
+          </h2>
+          <p className="text-slate-300 leading-relaxed">
+            Halo! Saya Mulyani Indriati, seorang siswi SMK jurusan Teknik Komputer dan Jaringan (TKJ). 
+            Selain memiliki ketertarikan di bidang teknologi jaringan dan komputer, saya juga aktif dalam 
+            keorganisasian sekolah. Saya terbiasa bekerja dalam tim, mengelola administrasi, serta memiliki 
+            jiwa kepemimpinan yang kuat.
+          </p>
+        </section>
 
-          <div className="flex flex-col mt-10 items-center justify-center sm:flex-row sm:space-x-4 gap-3">
-            <AnimatedText delay={0.6}>
-              <Link
-                href={"/resume"}
-                target="_blank"
-                className={cn(buttonVariants({ size: "lg" }))}
-                aria-label="View resume"
-              >
-                <Icons.post className="w-4 h-4 mr-2" /> Resume
-              </Link>
-            </AnimatedText>
-            <AnimatedText delay={0.8}>
-              <Link
-                href={"/contact"}
-                rel="noreferrer"
-                className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                    size: "lg",
-                  })
-                )}
-                aria-label="Contact Naman Barkiya"
-              >
-                <Icons.contact className="w-4 h-4 mr-2" /> Contact
-              </Link>
-            </AnimatedText>
+        {/* Keahlian */}
+        <section className="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700/50 shadow-xl backdrop-blur-sm">
+          <h2 className="text-2xl font-bold text-blue-400 mb-6 border-b border-slate-700 pb-2">
+            Keahlian
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div className="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all transform hover:-translate-y-1">
+              <h3 className="font-semibold text-blue-300 text-lg">Administrasi & Arsip</h3>
+              <p className="text-sm text-slate-400 mt-1">Pengelolaan dokumen, pencatatan rapat, dan surat-menyurat.</p>
+            </div>
+
+            <div className="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all transform hover:-translate-y-1">
+              <h3 className="font-semibold text-blue-300 text-lg">Kepemimpinan</h3>
+              <p className="text-sm text-slate-400 mt-1">Manajemen tim, komunikasi publik, dan pengambilan keputusan.</p>
+            </div>
+
+            <div className="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all transform hover:-translate-y-1">
+              <h3 className="font-semibold text-blue-300 text-lg">Dasar TKJ</h3>
+              <p className="text-sm text-slate-400 mt-1">Pemahaman dasar jaringan komputer dan perakitan hardware.</p>
+            </div>
+
+            <div className="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all transform hover:-translate-y-1">
+              <h3 className="font-semibold text-blue-300 text-lg">Kerja Sama Tim</h3>
+              <p className="text-sm text-slate-400 mt-1">Kolaborasi tinggi dan kedisiplinan dari pengalaman ekstrakurikuler.</p>
+            </div>
+
           </div>
-          <AnimatedText delay={1.2}>
-            <Icons.chevronDown className="h-6 w-6 mt-10" />
-          </AnimatedText>
-        </div>
-      </section>
-      <AnimatedSection
-        direction="up"
-        className="container space-y-6 bg-muted py-10 my-14"
-        id="projects"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.projects.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.projects.description}
-          </AnimatedText>
-        </div>
-        <div className="w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full items-stretch">
-            {featuredProjects.map((exp, index) => (
-              <AnimatedSection
-                key={exp.id}
-                delay={0.1 * (index + 1)}
-                direction="up"
-                className="h-full w-full min-w-0"
-              >
-                <ProjectCard project={exp} />
-              </AnimatedSection>
-            ))}
+        </section>
+
+        {/* Pengalaman Organisasi */}
+        <section className="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700/50 shadow-xl backdrop-blur-sm">
+          <h2 className="text-2xl font-bold text-blue-400 mb-6 border-b border-slate-700 pb-2">
+            Pengalaman & Organisasi
+          </h2>
+          <div className="space-y-6 border-l-2 border-blue-500 pl-4 md:pl-6">
+            
+            <div className="relative group">
+              <span className="text-xs font-semibold px-2,5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                Calon Wakil Ketua MPK
+              </span>
+              <h3 className="text-xl font-bold text-slate-100 mt-2">Majelis Perwakilan Kelas (MPK)</h3>
+              <p className="text-sm text-slate-400 mt-1">Mengikuti proses seleksi dan pencalonan kepemimpinan untuk mengarahkan serta mengawasi aspirasi siswa di sekolah.</p>
+            </div>
+
+            <div className="relative group">
+              <span className="text-xs font-semibold px-2,5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                Sekretaris
+              </span>
+              <h3 className="text-xl font-bold text-slate-100 mt-2">Majelis Perwakilan Kelas (MPK)</h3>
+              <p className="text-sm text-slate-400 mt-1">Bertanggung jawab atas administrasi organisasi, penyusunan notulensi rapat, dan pengelolaan arsip kegiatan.</p>
+            </div>
+
+            <div className="relative group">
+              <span className="text-xs font-semibold px-2,5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                Anggota
+              </span>
+              <h3 className="text-xl font-bold text-slate-100 mt-2">Ekstrakurikuler Drumband</h3>
+              <p className="text-sm text-slate-400 mt-1">Melatih kedisiplinan, fokus, serta kerja sama tim dalam menampilkan pertunjukan musik yang harmonis.</p>
+            </div>
+
           </div>
-        </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/projects">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
-      <AnimatedSection
-        direction="up"
-        className="container space-y-6 py-10 my-14"
-        id="experience"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.experience.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.experience.description}
-          </AnimatedText>
-        </div>
-        <div className="mx-auto grid justify-center gap-4 md:w-full lg:grid-cols-3">
-          {experiences.slice(0, 3).map((experience, index) => (
-            <AnimatedSection
-              key={experience.id}
-              delay={0.1 * (index + 1)}
-              direction="up"
-            >
-              <ExperienceCard experience={experience} />
-            </AnimatedSection>
-          ))}
-        </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/experience">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
-      <AnimatedSection
-        direction="up"
-        className="container space-y-6 bg-muted py-10 my-14"
-        id="contributions"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.contributions.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.contributions.description}
-          </AnimatedText>
-        </div>
-        <ContributionCard contributions={featuredContributions} />
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/contributions">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
-      <AnimatedSection
-        direction="up"
-        className="container space-y-6 py-10 my-14"
-        id="blogs"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.blogs.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.blogs.description}
-          </AnimatedText>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full items-stretch">
-          {featuredBlogs.map((blog, index) => (
-            <AnimatedSection
-              key={blog.slug}
-              delay={0.1 * (index + 1)}
-              direction="up"
-              className="h-full w-full min-w-0"
-            >
-              <BlogCard blog={blog} />
-            </AnimatedSection>
-          ))}
-        </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/blogs">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
-      <AnimatedSection
-        direction="up"
-        className="container space-y-6 bg-muted py-10 my-14"
-        id="skills"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.skills.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.skills.description}
-          </AnimatedText>
-        </div>
-        <SkillsCard skills={featuredSkills} />
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/skills">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
-      </AnimatedSection>
-    </ClientPageWrapper>
+        </section>
+
+        {/* Kontak */}
+        <section className="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700/50 shadow-xl backdrop-blur-sm">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4 border-b border-slate-700 pb-2">
+            Kontak
+          </h2>
+          <p className="text-slate-300">Jika ingin berdiskusi atau terhubung dengan saya:</p>
+          <div className="mt-4 space-y-2 text-slate-300">
+            <p>📧 <span className="font-medium text-slate-200">Email:</span> mulyaniindriati7@gmail.com</p>
+            <p>🏫 <span className="font-medium text-slate-200">Sekolah:</span> SMK Teknik Komputer dan Jaringan</p>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center text-slate-500 text-sm py-6">
+          <p>&copy; 2026 Mulyani Indriati. Dibuat untuk Tugas Portofolio Digital.</p>
+        </footer>
+
+      </div>
+    </main>
   );
 }
